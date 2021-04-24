@@ -25,8 +25,14 @@ def create_table(table):
 
   c.execute(f"""CREATE TABLE {table}(
       event_id int IDENTITY(1,1) NOT NULL,
+      event_type int,
       event_name varchar (255),
-      purse int
+      event_winner int FOREIGN KEY REFERENCES golfers(golfer_id),
+      purse int,
+      _first int,
+      _second int,
+      _third int,
+      _fourth_to_tenth int
       PRIMARY KEY (event_id))
     """)
   c.commit()
@@ -54,8 +60,7 @@ def show_table(table):
   records = c.fetchall()
   print(records)
 
-
-#show_table(table='tours')  #golfers, courses, tours
-#create_table(table='courses')
+#show_table(table='events')  #golfers, courses, tours, events
+create_table(table='events')
 #drop_table(table='test')
 
